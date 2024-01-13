@@ -1,0 +1,65 @@
+import math
+
+def calculate_quadratic_expression(a, b, c, x):
+    return a * x**2 + b * x + c
+
+def calculate_solvability(a, b, c):
+    discriminant = b**2 - 4 * a * c
+    return math.sqrt(discriminant) if discriminant > 0 else 0
+
+def check_triangle_validity(a, b, c):
+    return 1 if a + b > c and b + c > a and a + c > b else 0
+
+def calculate_triangle_properties(a, b, c):
+    perimeter = (a + b + c) / 2
+    area = math.sqrt(perimeter * (perimeter - a) * (perimeter - b) * (perimeter - c))
+    return perimeter, area
+
+def main():
+    try:
+        user_input = raw_input  # For Python 2 compatibility
+    except NameError:
+        user_input = input  # For Python 3
+
+    while True:
+        try:
+            a = float(user_input("Enter the value of a: "))
+            b = float(user_input("Enter the value of b: "))
+            c = float(user_input("Enter the value of c: "))
+            x = float(user_input("Enter the value of x: "))  # Task 1
+
+            result_s1 = calculate_quadratic_expression(a, b, c, x)
+            print(f"S1 = {result_s1}")  # Task 2
+
+            result_s2 = calculate_solvability(a, b, c)  # Task 3
+            print(f"S2 = {result_s2}")
+
+            break
+
+        except ValueError:
+            print("Please enter valid real numbers")
+        except Exception as e:
+            print(f"Error: {e}")
+
+    while True:
+        try:
+            a = float(user_input("Re-enter the value of a: "))
+            b = float(user_input("Re-enter the value of b: "))
+            c = float(user_input("Re-enter the value of c: "))
+                        
+            if check_triangle_validity(a, b, c):  # Task 4
+                perimeter, area = calculate_triangle_properties(a, b, c)
+                print(f"Perimeter of the triangle with sides a, b, c: {perimeter}")
+                print(f"Area of the triangle with sides a, b, c: {area}")
+            else:
+                print("a, b, c do not form sides of a triangle")  # Task 5
+
+            break
+        
+        except ValueError:
+            print("Please enter valid real numbers")
+        except Exception as e:
+            print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
